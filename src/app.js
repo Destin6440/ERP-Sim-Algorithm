@@ -1,3 +1,4 @@
+import { validateCapture, prepareCapture } from "./reports.js";
 import {
   policies,
   number,
@@ -430,11 +431,18 @@ $("#preview").onclick = () => {
     revenue: "Period revenue (Value)",
     cogs: "TOTAL COGS (Cost)",
   };
+  const aliases = {
+    code: ["material", "product code"],
+    sold: ["qty", "quantity"],
+    stock: ["stock", "current stock"],
+    revenue: ["value", "net value"],
+    cogs: ["cost", "total cogs"],
+  };
   $("#mapping").innerHTML =
     Object.entries(names)
       .map(
         ([k, v]) =>
-          `<label>${v}<select data-map="${k}"><option value="">Do not import</option>${table.headers.map((h, i) => `<option value="${i}" ${{ code: "material", sold: "qty", stock: "stock", revenue: "value", cogs: "cost" }[k] === h.toLowerCase() ? "selected" : ""}>${esc(h)}</option>`).join("")}</select></label>`,
+          `<label>${v}<select data-map="${k}"><option value="">Do not import</option>${table.headers.map((h, i) => `<option value="${i}" ${aliases[k].includes(h.toLowerCase().trim()) ? "selected" : ""}>${esc(h)}</option>`).join("")}</select></label>`,
       )
       .join("") +
     `<table><thead><tr>${table.headers.map((h) => `<th>${esc(h)}</th>`).join("")}</tr></thead><tbody>${table.rows
@@ -469,11 +477,17 @@ $("#import-confirm").onclick = () => {
     return message(
       "This exact report is already saved. Repeated imports into an open observation replace cells. For a genuinely different simulation period, explicitly confirm that below; to correct the latest saved observation, undo it first.",
     );
+  let imported;
+  try {
+    imported = importRows(draft, table, map);
+  } catch (error) {
+    return message(error.message);
+  }
   if (!reportSources.includes(source)) reportSources.push(source);
   const matches = table.rows.filter((r) =>
     draft.some((d) => d.code === r[map.code]),
   ).length;
-  draft = importRows(draft, table, map);
+  draft = imported;
   $("#days").value = days;
   state.dirty = true;
   render();
@@ -591,3 +605,101 @@ $("#demo").onclick = async () => {
   );
 };
 load();
+
+// Captures are staged for review only. They never apply settings or save observations.
+let pendingCapture = null;
+function receiveCapture(report) {
+  try {
+    pendingCapture = structuredClone(validateCapture(report));
+    $("#capture-status").textContent =
+      `Report ready: ${report.title} · ${report.rows.length} rendered rows. Review before importing. No inputs have changed.`;
+    $("#capture-review").disabled = false;
+  } catch (error) {
+    message("Capture rejected: " + error.message);
+  }
+}
+window.addEventListener("message", (event) => {
+  if (
+    event.source !== window ||
+    event.origin !== location.origin ||
+    event.data?.type !== "sailerp-report-preview"
+  )
+    return;
+  receiveCapture(event.data.report);
+});
+$("#capture-file").onchange = async (event) => {
+  try {
+    const file = event.target.files[0];
+    if (!file) return;
+    if (file.size > 5 * 1024 * 1024) throw Error("Capture exceeds 5 MB.");
+    receiveCapture(JSON.parse(await file.text()));
+  } catch (error) {
+    message("Capture rejected: " + error.message);
+  }
+  event.target.value = "";
+};
+let reviewingCapture = null;
+$("#capture-review").onclick = () => {
+  if (!pendingCapture) return;
+  reviewingCapture = structuredClone(pendingCapture);
+  $("#capture-title").textContent = reviewingCapture.title;
+  $("#capture-preview-message").textContent = reviewingCapture.partial
+    ? "Incomplete capture: SAP reports more rows than were rendered. Use a complete CSV/TSV export instead."
+    : "Rendered rows only. Verify filters, totals, pagination and completeness in SAP. A screenshot cannot verify live extraction.";
+  $("#capture-table").innerHTML =
+    `<table><thead><tr>${reviewingCapture.headers.map((h) => `<th>${esc(h)}</th>`).join("")}</tr></thead><tbody>${reviewingCapture.rows
+      .slice(0, 8)
+      .map((r) => `<tr>${r.map((v) => `<td>${esc(v)}</td>`).join("")}</tr>`)
+      .join(
+        "",
+      )}</tbody></table><p>${reviewingCapture.rows.length} rendered rows captured. Preview shows up to 8.</p>`;
+  $("#capture-complete").checked = false;
+  $("#capture-prepare").disabled = !!reviewingCapture.partial;
+  $("#capture-round").value = "";
+  $("#capture-day").value = "";
+  $("#capture-days").value = "";
+  $("#capture-dialog").showModal();
+};
+$("#capture-clear").onclick = () => {
+  pendingCapture = null;
+  $("#capture-review").disabled = true;
+  $("#capture-status").textContent =
+    "No staged capture. Clearing this preview does not stop the extension watcher.";
+};
+$("#capture-cancel").onclick = () => $("#capture-dialog").close();
+$("#capture-prepare").onclick = () => {
+  try {
+    if (!reviewingCapture || reviewingCapture.partial)
+      throw Error("Use a complete report export.");
+    const days = number($("#capture-days").value);
+    if (!(days > 0))
+      throw Error("Confirm the simulated days covered by these report rows.");
+    if (!$("#capture-complete").checked)
+      throw Error(
+        "Confirm report completeness and the meaning of Quantity and Cost before continuing.",
+      );
+    const prepared = prepareCapture(reviewingCapture, {
+      decimal: $("#capture-format").value,
+      round: $("#capture-round").value.trim(),
+      day: $("#capture-day").value.trim(),
+    });
+    const unknown = prepared.rows
+      .map((r) => r[0])
+      .filter((code) => !state.products.some((p) => p.code === code));
+    if (unknown.length)
+      throw Error(
+        `Add these Material codes under Inputs → Products & actual settings first: ${unknown.join(", ")}. Prices, unit costs and advertising cannot be inferred from this report.`,
+      );
+    $("#paste").value = prepared.text;
+    $("#preview").click();
+    $("#import-days").value = days;
+    $("#new-report-period").checked = false;
+    $("#capture-dialog").close();
+    $("#import").showModal();
+    $("#import-message").textContent =
+      prepared.warnings.join(" ") +
+      " Availability stays unchanged (default Unsure); current stock must come from inventory. No settings or observations have been saved.";
+  } catch (error) {
+    $("#capture-preview-message").textContent = error.message;
+  }
+};

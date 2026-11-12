@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>SailERP capture</title>
+    <link rel="stylesheet" href="popup.css" />
+  </head>
+  <body>
+    <h1>SailERP capture</h1>
+    <p>
+      Read the report open in this SAP tab. No SAP edits, clicks, refreshes or
+      transactions.
+    </p>
+    <button id="capture">Capture visible report</button
+    ><button id="watch">Start watching this report</button>
+    <p id="status" role="status"></p>
+    <div id="preview"></div>
+    <label>SailERP destination<select id="destination"></select></label
+    ><button id="send">Send to SailERP preview</button
+    ><button id="download">Download capture JSON</button
+    ><button id="clear">Clear stored capture</button>
+    <p class="hint">
+      Keep SailERP open in another tab. Watching reads this page every 2 seconds
+      until stopped or navigated away. Review capture completeness and period in
+      SailERP; observations are never saved automatically.
+    </p>
+    <script src="popup.js"></script>
+  </body>
+</html>

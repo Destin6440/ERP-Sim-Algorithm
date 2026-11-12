@@ -1,0 +1,29 @@
+{
+  "manifest_version": 3,
+  "name": "SailERP Read-only Report Capture",
+  "version": "1.0.0",
+  "description": "Read visible ERPsim report tables and send them to a SailERP import preview. Never enters SAP transactions.",
+  "permissions": ["activeTab", "scripting", "storage"],
+  "host_permissions": [
+    "https://jenga.ucc.uwm.edu/*",
+    "http://localhost/*",
+    "http://127.0.0.1/*",
+    "https://destin6440.github.io/ERP-Sim-Algorithm/*"
+  ],
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "Capture ERPsim report"
+  },
+  "background": { "service_worker": "background.js" },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://localhost/*",
+        "http://127.0.0.1/*",
+        "https://destin6440.github.io/ERP-Sim-Algorithm/*"
+      ],
+      "js": ["bridge.js"],
+      "run_at": "document_idle"
+    }
+  ]
+}

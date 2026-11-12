@@ -134,6 +134,55 @@
             </div>
           </details>
         </section>
+        <section id="sap-connection">
+          <h2>Read SAP reports</h2>
+          <p>
+            Capture a report you have open in Chrome or Edge. Captures go to a
+            preview; you confirm the period and completeness before importing.
+            Stock, settings and availability are never guessed.
+          </p>
+          <details>
+            <summary>Install the read-only capture helper</summary>
+            <ol>
+              <li>
+                Update your SailERP checkout. Open Chrome's
+                <code>chrome://extensions</code> or Edge's
+                <code>edge://extensions</code>.
+              </li>
+              <li>
+                Turn on Developer mode, choose Load unpacked, and select the
+                <code>SailERP/extension</code> folder.
+              </li>
+              <li>
+                Keep SailERP open. In the SAP report tab, open SailERP capture,
+                click Capture visible report, then Send to SailERP preview.
+              </li>
+              <li>
+                Optionally start watching that report for rendered-data changes.
+                The helper does not refresh SAP or navigate between reports.
+              </li>
+            </ol>
+            <p>
+              Sales imports support Material, Quantity, Net Value and total
+              Cost. Price Market and Production reports need manual
+              interpretation. Empty reports stay missing. Virtualized, filtered
+              or paginated data requires a complete export or manual
+              verification. Live SAP extraction has not yet been verified.
+              <a href="extension/README.md">Capture guide</a>
+            </p>
+          </details>
+          <p id="capture-status" role="status">No staged SAP report.</p>
+          <div class="tools">
+            <button id="capture-review" disabled>Review captured report</button
+            ><button id="capture-clear">Clear staged capture</button
+            ><label class="file"
+              >Load capture JSON<input
+                id="capture-file"
+                type="file"
+                accept="application/json"
+            /></label>
+          </div>
+        </section>
         <section id="tools">
           <h2>Policies & experiments</h2>
           <details>
@@ -250,6 +299,46 @@
         represent a genuinely different simulation period</label
       ><button id="import-confirm">Replace mapped cells</button
       ><button id="import-close">Close</button>
+    </dialog>
+    <dialog id="capture-dialog" aria-labelledby="capture-title">
+      <h2 id="capture-title">Captured SAP report</h2>
+      <p id="capture-preview-message" role="status"></p>
+      <div id="capture-table" class="table-wrap"></div>
+      <div class="controls">
+        <label
+          >Number format<select id="capture-format">
+            <option value="dot">1,234.56 (decimal point)</option>
+            <option value="comma">1.234,56 (decimal comma)</option>
+          </select></label
+        ><label
+          >Round filter (optional)<input
+            id="capture-round"
+            placeholder="1" /></label
+        ><label
+          >Day filter (optional)<input
+            id="capture-day"
+            placeholder="1" /></label
+        ><label
+          >Simulated days covered<input
+            id="capture-days"
+            type="number"
+            min="0.01"
+            step="any"
+            placeholder="Confirm period"
+        /></label>
+      </div>
+      <p>
+        Filter one round/day when multiple periods appear. The report title may
+        show the current simulation day rather than the full data period.
+      </p>
+      <label class="check"
+        ><input id="capture-complete" type="checkbox" />I verified all relevant
+        rows are captured, Quantity is actual units sold during this period (not
+        open orders or a cumulative total), and sales Cost is total COGS. For
+        inventory, Stock is current available finished-product inventory.</label
+      >
+      <button id="capture-prepare">Prepare import preview</button
+      ><button id="capture-cancel">Cancel</button>
     </dialog>
     <script type="module" src="src/app.js"></script>
   </body>

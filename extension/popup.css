@@ -1,0 +1,48 @@
+body {
+  width: 350px;
+  padding: 18px;
+  font: 14px system-ui;
+  color: #173d3e;
+  background: #f3f5ef;
+}
+h1 {
+  font-size: 22px;
+}
+p {
+  line-height: 1.5;
+}
+button,
+select {
+  padding: 10px;
+  margin: 5px 0;
+  border: 1px solid #bccdbb;
+  border-radius: 6px;
+  background: white;
+  color: inherit;
+  width: 100%;
+  font: inherit;
+}
+button {
+  cursor: pointer;
+}
+#capture,
+#send {
+  background: #d6ed91;
+}
+.hint {
+  font-size: 12px;
+  color: #596f62;
+}
+label {
+  display: block;
+}
+#status {
+  font-weight: 600;
+  overflow-wrap: anywhere;
+}
+#preview {
+  font-size: 12px;
+}
+button:disabled {
+  opacity: 0.5;
+}

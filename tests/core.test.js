@@ -364,3 +364,25 @@ test("game end suppresses supply restoration and price tests even with zero stoc
   assert.doesNotMatch(a[0].text, /Restore supply|price.*test/);
   assert.equal(plan(p, history, 3, 0).gap, 0);
 });
+test("blank mapped import cells clear old data; unmapped cells survive and invalid values reject", () => {
+  const previous = [row({ revenue: 40000, cogs: 30000 })];
+  const t = parseTable("Material,Qty,Value,Cost\nF01,12000,,36000");
+  const result = importRows(previous, t, {
+    code: "0",
+    sold: "1",
+    revenue: "2",
+    cogs: "3",
+  });
+  assert.equal(result[0].revenue, null);
+  assert.equal(result[0].sold, 12000);
+  assert.equal(result[0].stock, 100000);
+  assert.equal(previous[0].revenue, 40000);
+  assert.throws(
+    () =>
+      importRows(previous, parseTable("Material,Qty\nF01,n/a"), {
+        code: "0",
+        sold: "1",
+      }),
+    /Invalid sold/,
+  );
+});

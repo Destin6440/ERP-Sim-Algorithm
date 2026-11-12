@@ -359,8 +359,17 @@ export function importRows(existing, table, map) {
     if (!r) continue;
     for (const key of ["sold", "stock", "revenue", "cogs"])
       if (map[key] !== "" && map[key] !== undefined) {
-        const v = number(cells[map[key]]);
-        if (v !== null && v >= 0) r[key] = v;
+        const raw = cells[map[key]];
+        if (raw === undefined || String(raw).trim() === "") {
+          r[key] = null;
+        } else {
+          const v = number(raw);
+          if (v === null || v < 0)
+            throw Error(
+              `Invalid ${key} value for ${code}. Use plain nonnegative numbers.`,
+            );
+          r[key] = v;
+        }
       }
   }
   return out;

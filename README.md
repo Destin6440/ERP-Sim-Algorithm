@@ -40,7 +40,7 @@ New products start with zero placeholder settings; replace these with real setti
 
 Open **Paste report** for CSV/TSV. Preview and map columns explicitly; confirm the simulated period. `Material` maps to code, `Qty` to units sold, `Value` to period revenue, `Cost` to **total period COGS**, and `Stock` to current inventory. `Description` is display information, not a key. Codes must match existing products exactly; unknown codes are skipped and the matching row count is reported. Numeric cells must be plain, ungrouped numbers in the selected currency (decimal point; no currency symbols). CSV quoting supports commas in descriptions. Native XLSX is intentionally unsupported: export CSV/TSV first.
 
-Import sales and inventory tables separately into the same open observation to join by material code. Mapped cells **replace** values; importing a report again does not add quantities. Unmapped cells remain intact; blank numeric report cells do not replace existing values. Verify the preview and grid, especially if reports contain duplicate codes (last valid mapped value wins). A saved observation closes a period. Exact previously saved reports are blocked unless you explicitly confirm they belong to a genuinely different simulation period. To correct the latest saved observation, undo it first, then import its replacement. Undo the last update if necessary. Sales and stock never carry into the next grid automatically.
+Import sales and inventory tables separately into the same open observation to join by material code. Mapped cells **replace** values; importing a report again does not add quantities. Unmapped cells remain intact; blank mapped numeric cells clear previous mapped values to missing. Invalid mapped numbers are rejected instead of silently retaining old data. Verify the preview and grid, especially if reports contain duplicate codes (last valid mapped value wins). A saved observation closes a period. Exact previously saved reports are blocked unless you explicitly confirm they belong to a genuinely different simulation period. To correct the latest saved observation, undo it first, then import its replacement. Undo the last update if necessary. Sales and stock never carry into the next grid automatically.
 
 `samples/sales.tsv` and `samples/inventory.csv` are synthetic two-day reports. **Open separate demonstration** loads `samples/demo.json` into a separate localStorage namespace. It never replaces the live workspace. Return to your workspace with the same button.
 
@@ -94,3 +94,19 @@ Run `node scripts/simulate-30-days.mjs` to reproduce the conversation's single-p
 The example retains Days 1–4, then assumes 9,000 sales/day, price 4.08, variable cost 3.00, and advertising 500/day through Day 30. All later receipts occur before sales. Receipts are synthetic confirmed inputs, with capacity, materials and lead times assumed feasible: 21,000 on Day 5; 27,000 on Days 6, 9, 12, 15, 18, 21 and 24; and 18,000 on Day 27. Game length is explicitly assumed to be 30 simulated days. The script checks stock conservation, margin totals and the generated actions. These assumed sales are not forecasts; the receipts do not establish a feasible production schedule or an optimal ordering policy.
 
 At zero remaining game days, action cards close the game and stop new replenishment and future advertising, instead of replenishing an end-of-game zero stock balance.
+
+## Read-only SAP report capture (optional)
+
+For Chrome and Edge, the optional [capture helper](extension/README.md) reads rendered report tables on the supplied SAP host using your already logged-in tab. Install the `extension` folder with Developer mode → Load unpacked. SailERP **Inputs → Read SAP reports** accepts extension deliveries or downloaded capture JSON. You confirm table completeness, period, number format and report meanings before importing. A watcher can stage changed rendered data every two seconds; it never updates the entry grid, saves observations or applies settings automatically. It does not refresh SAP or navigate reports.
+
+Screenshot-based headers are supported for Summary Sales Order and Sales reports: Material, Description, Quantity, Net Value and total Cost. Detailed sales rows are grouped by material within one explicitly confirmed round/day. Unit Cost and market prices do not become product settings. Empty reports remain missing; declared partial captures are blocked. Current inventory is a separate report and remains required. Production reports are not automatically interpreted as confirmed incoming finished products. Unknown product codes need actual product settings first.
+
+The cloud browser's managed `ExtensionInstallBlocklist` prevents native extension installation during development. The table reader is exercised in an isolated browser world, and message delivery/watchers are tested using simulated Chrome transport against synthetic SAP-shaped fixtures. Native installation and the live authenticated SAP page remain unverified. Do not treat fixture results as proof of compatibility with every SAP layout, frame, filter, or virtualized table. A complete CSV/TSV export remains available if capture fails. Safari and Firefox extensions are not included.
+
+Run the additional fixture browser checks (with the local server running):
+
+```sh
+SAILERP_URL=http://127.0.0.1:8000 PLAYWRIGHT_MODULE=/tmp/sailerp-browser/node_modules/playwright/index.mjs node scripts/report-browser-check.mjs
+```
+
+All automated report interpretation tests run with the normal `npm test` command. No browser driver or extension is required for manual SailERP entry, paste imports or its calculation tests.
