@@ -1,0 +1,192 @@
+{
+  "version": 1,
+  "products": [
+    {
+      "code": "F01",
+      "name": "Original Muesli",
+      "price": 4,
+      "cost": 3,
+      "basis": "variable",
+      "ads": 400,
+      "mixed": false
+    },
+    {
+      "code": "F02",
+      "name": "Berry Muesli",
+      "price": 4.2,
+      "cost": 3,
+      "basis": "standard",
+      "ads": 600,
+      "mixed": false
+    },
+    {
+      "code": "F03",
+      "name": "Nut Muesli",
+      "price": 4.5,
+      "cost": 3.2,
+      "basis": "variable",
+      "ads": 300,
+      "mixed": false
+    }
+  ],
+  "changes": [],
+  "policy": {
+    "step": 2,
+    "target": 3,
+    "buffer": 1,
+    "phase": 2
+  },
+  "remaining": 8,
+  "experiment": null,
+  "dirty": false,
+  "observations": [
+    {
+      "id": "2026-01-01T00:00:02.000Z",
+      "days": 2,
+      "productCodes": [
+        "F01",
+        "F02",
+        "F03"
+      ],
+      "contaminated": false,
+      "rows": [
+        {
+          "code": "F01",
+          "settings": {
+            "code": "F01",
+            "name": "Original Muesli",
+            "price": 4,
+            "cost": 3,
+            "basis": "variable",
+            "ads": 400,
+            "mixed": false
+          },
+          "sold": 20000,
+          "stock": 18000,
+          "availability": "continuous",
+          "incoming": [
+            {
+              "qty": 20000,
+              "days": 2
+            }
+          ],
+          "incomingKnown": true,
+          "revenue": null,
+          "cogs": null
+        },
+        {
+          "code": "F02",
+          "settings": {
+            "code": "F02",
+            "name": "Berry Muesli",
+            "price": 4.2,
+            "cost": 3,
+            "basis": "standard",
+            "ads": 600,
+            "mixed": false
+          },
+          "sold": 18000,
+          "stock": 90000,
+          "availability": "continuous",
+          "incoming": [],
+          "incomingKnown": true,
+          "revenue": null,
+          "cogs": null
+        },
+        {
+          "code": "F03",
+          "settings": {
+            "code": "F03",
+            "name": "Nut Muesli",
+            "price": 4.5,
+            "cost": 3.2,
+            "basis": "variable",
+            "ads": 300,
+            "mixed": false
+          },
+          "sold": 0,
+          "stock": 0,
+          "availability": "stockout",
+          "incoming": [],
+          "incomingKnown": false,
+          "revenue": null,
+          "cogs": null
+        }
+      ]
+    },
+    {
+      "id": "2026-01-01T00:00:04.000Z",
+      "days": 2,
+      "productCodes": [
+        "F01",
+        "F02",
+        "F03"
+      ],
+      "contaminated": false,
+      "rows": [
+        {
+          "code": "F01",
+          "settings": {
+            "code": "F01",
+            "name": "Original Muesli",
+            "price": 4,
+            "cost": 3,
+            "basis": "variable",
+            "ads": 400,
+            "mixed": false
+          },
+          "sold": 20000,
+          "stock": 18000,
+          "availability": "continuous",
+          "incoming": [
+            {
+              "qty": 20000,
+              "days": 2
+            }
+          ],
+          "incomingKnown": true,
+          "revenue": null,
+          "cogs": null
+        },
+        {
+          "code": "F02",
+          "settings": {
+            "code": "F02",
+            "name": "Berry Muesli",
+            "price": 4.2,
+            "cost": 3,
+            "basis": "standard",
+            "ads": 600,
+            "mixed": false
+          },
+          "sold": 18000,
+          "stock": 90000,
+          "availability": "continuous",
+          "incoming": [],
+          "incomingKnown": true,
+          "revenue": null,
+          "cogs": null
+        },
+        {
+          "code": "F03",
+          "settings": {
+            "code": "F03",
+            "name": "Nut Muesli",
+            "price": 4.5,
+            "cost": 3.2,
+            "basis": "variable",
+            "ads": 300,
+            "mixed": false
+          },
+          "sold": 0,
+          "stock": 0,
+          "availability": "stockout",
+          "incoming": [],
+          "incomingKnown": false,
+          "revenue": null,
+          "cogs": null
+        }
+      ]
+    }
+  ]
+}

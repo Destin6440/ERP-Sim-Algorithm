@@ -1,0 +1,1025 @@
+{
+  "version": 1,
+  "products": [
+    {
+      "code": "F01",
+      "name": "Original Muesli",
+      "price": 4.08,
+      "cost": 3,
+      "basis": "variable",
+      "ads": 500,
+      "mixed": false
+    }
+  ],
+  "observations": [
+    {
+      "id": "2026-01-01T00:00:00.000Z",
+      "days": 1,
+      "productCodes": [
+        "F01"
+      ],
+      "contaminated": false,
+      "rows": [
+        {
+          "code": "F01",
+          "settings": {
+            "code": "F01",
+            "name": "Original Muesli",
+            "price": 4,
+            "cost": 3,
+            "basis": "variable",
+            "ads": 500,
+            "mixed": false
+          },
+          "sold": 10000,
+          "stock": 10000,
+          "availability": "continuous",
+          "revenue": null,
+          "cogs": null,
+          "incoming": [
+            {
+              "qty": 15000,
+              "days": 2
+            }
+          ],
+          "incomingKnown": true
+        }
+      ]
+    },
+    {
+      "id": "2026-01-02T00:00:00.000Z",
+      "days": 1,
+      "productCodes": [
+        "F01"
+      ],
+      "contaminated": false,
+      "rows": [
+        {
+          "code": "F01",
+          "settings": {
+            "code": "F01",
+            "name": "Original Muesli",
+            "price": 4,
+            "cost": 3,
+            "basis": "variable",
+            "ads": 500,
+            "mixed": false
+          },
+          "sold": 9000,
+          "stock": 1000,
+          "availability": "continuous",
+          "revenue": null,
+          "cogs": null,
+          "incoming": [
+            {
+              "qty": 15000,
+              "days": 1
+            }
+          ],
+          "incomingKnown": true
+        }
+      ]
+    },
+    {
+      "id": "2026-01-03T00:00:00.000Z",
+      "days": 1,
+      "productCodes": [
+        "F01"
+      ],
+      "contaminated": false,
+      "rows": [
+        {
+          "code": "F01",
+          "settings": {
+            "code": "F01",
+            "name": "Original Muesli",
+            "price": 4.08,
+            "cost": 3,
+            "basis": "variable",
+            "ads": 500,
+            "mixed": false
+          },
+          "sold": 1000,
+          "stock": 15000,
+          "availability": "stockout",
+          "revenue": null,
+          "cogs": null,
+          "incoming": [],
+          "incomingKnown": true
+        }
+      ]
+    },
+    {
+      "id": "2026-01-04T00:00:00.000Z",
+      "days": 1,
+      "productCodes": [
+        "F01"
+      ],
+      "contaminated": false,
+      "rows": [
+        {
+          "code": "F01",
+          "settings": {
+            "code": "F01",
+            "name": "Original Muesli",
+            "price": 4.08,
+            "cost": 3,
+            "basis": "variable",
+            "ads": 500,
+            "mixed": false
+          },
+          "sold": 9000,
+          "stock": 6000,
+          "availability": "continuous",
+          "revenue": null,
+          "cogs": null,
+          "incoming": [],
+          "incomingKnown": true
+        }
+      ]
+    },
+    {
+      "id": "2026-01-05T00:00:00.000Z",
+      "days": 1,
+      "productCodes": [
+        "F01"
+      ],
+      "contaminated": false,
+      "rows": [
+        {
+          "code": "F01",
+          "settings": {
+            "code": "F01",
+            "name": "Original Muesli",
+            "price": 4.08,
+            "cost": 3,
+            "basis": "variable",
+            "ads": 500,
+            "mixed": false
+          },
+          "sold": 9000,
+          "stock": 18000,
+          "availability": "continuous",
+          "revenue": null,
+          "cogs": null,
+          "incoming": [
+            {
+              "qty": 27000,
+              "days": 1
+            }
+          ],
+          "incomingKnown": true
+        }
+      ]
+    },
+    {
+      "id": "2026-01-06T00:00:00.000Z",
+      "days": 1,
+      "productCodes": [
+        "F01"
+      ],
+      "contaminated": false,
+      "rows": [
+        {
+          "code": "F01",
+          "settings": {
+            "code": "F01",
+            "name": "Original Muesli",
+            "price": 4.08,
+            "cost": 3,
+            "basis": "variable",
+            "ads": 500,
+            "mixed": false
+          },
+          "sold": 9000,
+          "stock": 36000,
+          "availability": "continuous",
+          "revenue": null,
+          "cogs": null,
+          "incoming": [
+            {
+              "qty": 27000,
+              "days": 3
+            }
+          ],
+          "incomingKnown": true
+        }
+      ]
+    },
+    {
+      "id": "2026-01-07T00:00:00.000Z",
+      "days": 1,
+      "productCodes": [
+        "F01"
+      ],
+      "contaminated": false,
+      "rows": [
+        {
+          "code": "F01",
+          "settings": {
+            "code": "F01",
+            "name": "Original Muesli",
+            "price": 4.08,
+            "cost": 3,
+            "basis": "variable",
+            "ads": 500,
+            "mixed": false
+          },
+          "sold": 9000,
+          "stock": 27000,
+          "availability": "continuous",
+          "revenue": null,
+          "cogs": null,
+          "incoming": [
+            {
+              "qty": 27000,
+              "days": 2
+            }
+          ],
+          "incomingKnown": true
+        }
+      ]
+    },
+    {
+      "id": "2026-01-08T00:00:00.000Z",
+      "days": 1,
+      "productCodes": [
+        "F01"
+      ],
+      "contaminated": false,
+      "rows": [
+        {
+          "code": "F01",
+          "settings": {
+            "code": "F01",
+            "name": "Original Muesli",
+            "price": 4.08,
+            "cost": 3,
+            "basis": "variable",
+            "ads": 500,
+            "mixed": false
+          },
+          "sold": 9000,
+          "stock": 18000,
+          "availability": "continuous",
+          "revenue": null,
+          "cogs": null,
+          "incoming": [
+            {
+              "qty": 27000,
+              "days": 1
+            }
+          ],
+          "incomingKnown": true
+        }
+      ]
+    },
+    {
+      "id": "2026-01-09T00:00:00.000Z",
+      "days": 1,
+      "productCodes": [
+        "F01"
+      ],
+      "contaminated": false,
+      "rows": [
+        {
+          "code": "F01",
+          "settings": {
+            "code": "F01",
+            "name": "Original Muesli",
+            "price": 4.08,
+            "cost": 3,
+            "basis": "variable",
+            "ads": 500,
+            "mixed": false
+          },
+          "sold": 9000,
+          "stock": 36000,
+          "availability": "continuous",
+          "revenue": null,
+          "cogs": null,
+          "incoming": [
+            {
+              "qty": 27000,
+              "days": 3
+            }
+          ],
+          "incomingKnown": true
+        }
+      ]
+    },
+    {
+      "id": "2026-01-10T00:00:00.000Z",
+      "days": 1,
+      "productCodes": [
+        "F01"
+      ],
+      "contaminated": false,
+      "rows": [
+        {
+          "code": "F01",
+          "settings": {
+            "code": "F01",
+            "name": "Original Muesli",
+            "price": 4.08,
+            "cost": 3,
+            "basis": "variable",
+            "ads": 500,
+            "mixed": false
+          },
+          "sold": 9000,
+          "stock": 27000,
+          "availability": "continuous",
+          "revenue": null,
+          "cogs": null,
+          "incoming": [
+            {
+              "qty": 27000,
+              "days": 2
+            }
+          ],
+          "incomingKnown": true
+        }
+      ]
+    },
+    {
+      "id": "2026-01-11T00:00:00.000Z",
+      "days": 1,
+      "productCodes": [
+        "F01"
+      ],
+      "contaminated": false,
+      "rows": [
+        {
+          "code": "F01",
+          "settings": {
+            "code": "F01",
+            "name": "Original Muesli",
+            "price": 4.08,
+            "cost": 3,
+            "basis": "variable",
+            "ads": 500,
+            "mixed": false
+          },
+          "sold": 9000,
+          "stock": 18000,
+          "availability": "continuous",
+          "revenue": null,
+          "cogs": null,
+          "incoming": [
+            {
+              "qty": 27000,
+              "days": 1
+            }
+          ],
+          "incomingKnown": true
+        }
+      ]
+    },
+    {
+      "id": "2026-01-12T00:00:00.000Z",
+      "days": 1,
+      "productCodes": [
+        "F01"
+      ],
+      "contaminated": false,
+      "rows": [
+        {
+          "code": "F01",
+          "settings": {
+            "code": "F01",
+            "name": "Original Muesli",
+            "price": 4.08,
+            "cost": 3,
+            "basis": "variable",
+            "ads": 500,
+            "mixed": false
+          },
+          "sold": 9000,
+          "stock": 36000,
+          "availability": "continuous",
+          "revenue": null,
+          "cogs": null,
+          "incoming": [
+            {
+              "qty": 27000,
+              "days": 3
+            }
+          ],
+          "incomingKnown": true
+        }
+      ]
+    },
+    {
+      "id": "2026-01-13T00:00:00.000Z",
+      "days": 1,
+      "productCodes": [
+        "F01"
+      ],
+      "contaminated": false,
+      "rows": [
+        {
+          "code": "F01",
+          "settings": {
+            "code": "F01",
+            "name": "Original Muesli",
+            "price": 4.08,
+            "cost": 3,
+            "basis": "variable",
+            "ads": 500,
+            "mixed": false
+          },
+          "sold": 9000,
+          "stock": 27000,
+          "availability": "continuous",
+          "revenue": null,
+          "cogs": null,
+          "incoming": [
+            {
+              "qty": 27000,
+              "days": 2
+            }
+          ],
+          "incomingKnown": true
+        }
+      ]
+    },
+    {
+      "id": "2026-01-14T00:00:00.000Z",
+      "days": 1,
+      "productCodes": [
+        "F01"
+      ],
+      "contaminated": false,
+      "rows": [
+        {
+          "code": "F01",
+          "settings": {
+            "code": "F01",
+            "name": "Original Muesli",
+            "price": 4.08,
+            "cost": 3,
+            "basis": "variable",
+            "ads": 500,
+            "mixed": false
+          },
+          "sold": 9000,
+          "stock": 18000,
+          "availability": "continuous",
+          "revenue": null,
+          "cogs": null,
+          "incoming": [
+            {
+              "qty": 27000,
+              "days": 1
+            }
+          ],
+          "incomingKnown": true
+        }
+      ]
+    },
+    {
+      "id": "2026-01-15T00:00:00.000Z",
+      "days": 1,
+      "productCodes": [
+        "F01"
+      ],
+      "contaminated": false,
+      "rows": [
+        {
+          "code": "F01",
+          "settings": {
+            "code": "F01",
+            "name": "Original Muesli",
+            "price": 4.08,
+            "cost": 3,
+            "basis": "variable",
+            "ads": 500,
+            "mixed": false
+          },
+          "sold": 9000,
+          "stock": 36000,
+          "availability": "continuous",
+          "revenue": null,
+          "cogs": null,
+          "incoming": [
+            {
+              "qty": 27000,
+              "days": 3
+            }
+          ],
+          "incomingKnown": true
+        }
+      ]
+    },
+    {
+      "id": "2026-01-16T00:00:00.000Z",
+      "days": 1,
+      "productCodes": [
+        "F01"
+      ],
+      "contaminated": false,
+      "rows": [
+        {
+          "code": "F01",
+          "settings": {
+            "code": "F01",
+            "name": "Original Muesli",
+            "price": 4.08,
+            "cost": 3,
+            "basis": "variable",
+            "ads": 500,
+            "mixed": false
+          },
+          "sold": 9000,
+          "stock": 27000,
+          "availability": "continuous",
+          "revenue": null,
+          "cogs": null,
+          "incoming": [
+            {
+              "qty": 27000,
+              "days": 2
+            }
+          ],
+          "incomingKnown": true
+        }
+      ]
+    },
+    {
+      "id": "2026-01-17T00:00:00.000Z",
+      "days": 1,
+      "productCodes": [
+        "F01"
+      ],
+      "contaminated": false,
+      "rows": [
+        {
+          "code": "F01",
+          "settings": {
+            "code": "F01",
+            "name": "Original Muesli",
+            "price": 4.08,
+            "cost": 3,
+            "basis": "variable",
+            "ads": 500,
+            "mixed": false
+          },
+          "sold": 9000,
+          "stock": 18000,
+          "availability": "continuous",
+          "revenue": null,
+          "cogs": null,
+          "incoming": [
+            {
+              "qty": 27000,
+              "days": 1
+            }
+          ],
+          "incomingKnown": true
+        }
+      ]
+    },
+    {
+      "id": "2026-01-18T00:00:00.000Z",
+      "days": 1,
+      "productCodes": [
+        "F01"
+      ],
+      "contaminated": false,
+      "rows": [
+        {
+          "code": "F01",
+          "settings": {
+            "code": "F01",
+            "name": "Original Muesli",
+            "price": 4.08,
+            "cost": 3,
+            "basis": "variable",
+            "ads": 500,
+            "mixed": false
+          },
+          "sold": 9000,
+          "stock": 36000,
+          "availability": "continuous",
+          "revenue": null,
+          "cogs": null,
+          "incoming": [
+            {
+              "qty": 27000,
+              "days": 3
+            }
+          ],
+          "incomingKnown": true
+        }
+      ]
+    },
+    {
+      "id": "2026-01-19T00:00:00.000Z",
+      "days": 1,
+      "productCodes": [
+        "F01"
+      ],
+      "contaminated": false,
+      "rows": [
+        {
+          "code": "F01",
+          "settings": {
+            "code": "F01",
+            "name": "Original Muesli",
+            "price": 4.08,
+            "cost": 3,
+            "basis": "variable",
+            "ads": 500,
+            "mixed": false
+          },
+          "sold": 9000,
+          "stock": 27000,
+          "availability": "continuous",
+          "revenue": null,
+          "cogs": null,
+          "incoming": [
+            {
+              "qty": 27000,
+              "days": 2
+            }
+          ],
+          "incomingKnown": true
+        }
+      ]
+    },
+    {
+      "id": "2026-01-20T00:00:00.000Z",
+      "days": 1,
+      "productCodes": [
+        "F01"
+      ],
+      "contaminated": false,
+      "rows": [
+        {
+          "code": "F01",
+          "settings": {
+            "code": "F01",
+            "name": "Original Muesli",
+            "price": 4.08,
+            "cost": 3,
+            "basis": "variable",
+            "ads": 500,
+            "mixed": false
+          },
+          "sold": 9000,
+          "stock": 18000,
+          "availability": "continuous",
+          "revenue": null,
+          "cogs": null,
+          "incoming": [
+            {
+              "qty": 27000,
+              "days": 1
+            }
+          ],
+          "incomingKnown": true
+        }
+      ]
+    },
+    {
+      "id": "2026-01-21T00:00:00.000Z",
+      "days": 1,
+      "productCodes": [
+        "F01"
+      ],
+      "contaminated": false,
+      "rows": [
+        {
+          "code": "F01",
+          "settings": {
+            "code": "F01",
+            "name": "Original Muesli",
+            "price": 4.08,
+            "cost": 3,
+            "basis": "variable",
+            "ads": 500,
+            "mixed": false
+          },
+          "sold": 9000,
+          "stock": 36000,
+          "availability": "continuous",
+          "revenue": null,
+          "cogs": null,
+          "incoming": [
+            {
+              "qty": 27000,
+              "days": 3
+            }
+          ],
+          "incomingKnown": true
+        }
+      ]
+    },
+    {
+      "id": "2026-01-22T00:00:00.000Z",
+      "days": 1,
+      "productCodes": [
+        "F01"
+      ],
+      "contaminated": false,
+      "rows": [
+        {
+          "code": "F01",
+          "settings": {
+            "code": "F01",
+            "name": "Original Muesli",
+            "price": 4.08,
+            "cost": 3,
+            "basis": "variable",
+            "ads": 500,
+            "mixed": false
+          },
+          "sold": 9000,
+          "stock": 27000,
+          "availability": "continuous",
+          "revenue": null,
+          "cogs": null,
+          "incoming": [
+            {
+              "qty": 27000,
+              "days": 2
+            }
+          ],
+          "incomingKnown": true
+        }
+      ]
+    },
+    {
+      "id": "2026-01-23T00:00:00.000Z",
+      "days": 1,
+      "productCodes": [
+        "F01"
+      ],
+      "contaminated": false,
+      "rows": [
+        {
+          "code": "F01",
+          "settings": {
+            "code": "F01",
+            "name": "Original Muesli",
+            "price": 4.08,
+            "cost": 3,
+            "basis": "variable",
+            "ads": 500,
+            "mixed": false
+          },
+          "sold": 9000,
+          "stock": 18000,
+          "availability": "continuous",
+          "revenue": null,
+          "cogs": null,
+          "incoming": [
+            {
+              "qty": 27000,
+              "days": 1
+            }
+          ],
+          "incomingKnown": true
+        }
+      ]
+    },
+    {
+      "id": "2026-01-24T00:00:00.000Z",
+      "days": 1,
+      "productCodes": [
+        "F01"
+      ],
+      "contaminated": false,
+      "rows": [
+        {
+          "code": "F01",
+          "settings": {
+            "code": "F01",
+            "name": "Original Muesli",
+            "price": 4.08,
+            "cost": 3,
+            "basis": "variable",
+            "ads": 500,
+            "mixed": false
+          },
+          "sold": 9000,
+          "stock": 36000,
+          "availability": "continuous",
+          "revenue": null,
+          "cogs": null,
+          "incoming": [
+            {
+              "qty": 18000,
+              "days": 3
+            }
+          ],
+          "incomingKnown": true
+        }
+      ]
+    },
+    {
+      "id": "2026-01-25T00:00:00.000Z",
+      "days": 1,
+      "productCodes": [
+        "F01"
+      ],
+      "contaminated": false,
+      "rows": [
+        {
+          "code": "F01",
+          "settings": {
+            "code": "F01",
+            "name": "Original Muesli",
+            "price": 4.08,
+            "cost": 3,
+            "basis": "variable",
+            "ads": 500,
+            "mixed": false
+          },
+          "sold": 9000,
+          "stock": 27000,
+          "availability": "continuous",
+          "revenue": null,
+          "cogs": null,
+          "incoming": [
+            {
+              "qty": 18000,
+              "days": 2
+            }
+          ],
+          "incomingKnown": true
+        }
+      ]
+    },
+    {
+      "id": "2026-01-26T00:00:00.000Z",
+      "days": 1,
+      "productCodes": [
+        "F01"
+      ],
+      "contaminated": false,
+      "rows": [
+        {
+          "code": "F01",
+          "settings": {
+            "code": "F01",
+            "name": "Original Muesli",
+            "price": 4.08,
+            "cost": 3,
+            "basis": "variable",
+            "ads": 500,
+            "mixed": false
+          },
+          "sold": 9000,
+          "stock": 18000,
+          "availability": "continuous",
+          "revenue": null,
+          "cogs": null,
+          "incoming": [
+            {
+              "qty": 18000,
+              "days": 1
+            }
+          ],
+          "incomingKnown": true
+        }
+      ]
+    },
+    {
+      "id": "2026-01-27T00:00:00.000Z",
+      "days": 1,
+      "productCodes": [
+        "F01"
+      ],
+      "contaminated": false,
+      "rows": [
+        {
+          "code": "F01",
+          "settings": {
+            "code": "F01",
+            "name": "Original Muesli",
+            "price": 4.08,
+            "cost": 3,
+            "basis": "variable",
+            "ads": 500,
+            "mixed": false
+          },
+          "sold": 9000,
+          "stock": 27000,
+          "availability": "continuous",
+          "revenue": null,
+          "cogs": null,
+          "incoming": [],
+          "incomingKnown": true
+        }
+      ]
+    },
+    {
+      "id": "2026-01-28T00:00:00.000Z",
+      "days": 1,
+      "productCodes": [
+        "F01"
+      ],
+      "contaminated": false,
+      "rows": [
+        {
+          "code": "F01",
+          "settings": {
+            "code": "F01",
+            "name": "Original Muesli",
+            "price": 4.08,
+            "cost": 3,
+            "basis": "variable",
+            "ads": 500,
+            "mixed": false
+          },
+          "sold": 9000,
+          "stock": 18000,
+          "availability": "continuous",
+          "revenue": null,
+          "cogs": null,
+          "incoming": [],
+          "incomingKnown": true
+        }
+      ]
+    },
+    {
+      "id": "2026-01-29T00:00:00.000Z",
+      "days": 1,
+      "productCodes": [
+        "F01"
+      ],
+      "contaminated": false,
+      "rows": [
+        {
+          "code": "F01",
+          "settings": {
+            "code": "F01",
+            "name": "Original Muesli",
+            "price": 4.08,
+            "cost": 3,
+            "basis": "variable",
+            "ads": 500,
+            "mixed": false
+          },
+          "sold": 9000,
+          "stock": 9000,
+          "availability": "continuous",
+          "revenue": null,
+          "cogs": null,
+          "incoming": [],
+          "incomingKnown": true
+        }
+      ]
+    },
+    {
+      "id": "2026-01-30T00:00:00.000Z",
+      "days": 1,
+      "productCodes": [
+        "F01"
+      ],
+      "contaminated": false,
+      "rows": [
+        {
+          "code": "F01",
+          "settings": {
+            "code": "F01",
+            "name": "Original Muesli",
+            "price": 4.08,
+            "cost": 3,
+            "basis": "variable",
+            "ads": 500,
+            "mixed": false
+          },
+          "sold": 9000,
+          "stock": 0,
+          "availability": "continuous",
+          "revenue": null,
+          "cogs": null,
+          "incoming": [],
+          "incomingKnown": true
+        }
+      ]
+    }
+  ],
+  "changes": [
+    {
+      "code": "F01",
+      "patch": {
+        "price": 4.08
+      },
+      "boundary": "Day 3 start",
+      "at": "2026-01-03T00:00:00.000Z"
+    }
+  ],
+  "policy": {
+    "step": 2,
+    "target": 3,
+    "buffer": 1,
+    "phase": 2
+  },
+  "remaining": 0,
+  "experiment": null,
+  "dirty": false
+}
