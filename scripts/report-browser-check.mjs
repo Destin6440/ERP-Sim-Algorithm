@@ -186,8 +186,32 @@ try {
     .evaluate((el) => (el.innerHTML = '<tr><td colspan="8">No data</td></tr>'));
   assert.match(
     (await isolated("globalThis.SailERPReadOnly.snapshot()")).error,
-    /No rendered/,
+    /No readable/,
   );
+  // SAP UI5 analytical tables can be treegrids, use separate header/body
+  // tables, TD column labels, and TH row headers. All are rendered data.
+  await source
+    .locator("body")
+    .evaluate(
+      (el) =>
+        (el.innerHTML = `<h2>Sales Report : Round 1 Day 6</h2><div class="sapUiTable" role="treegrid"><div><table><tr><td>Round</td><td>Day</td><td>Material</td><td>Description</td><td>Quantity</td><td>Net Value</td><td>Cost</td></tr></table></div><div><table><tr><th scope="row" role="rowheader">01</th><td>04</td><td>JJ-F04</td><td>Raisin</td><td>6,769</td><td>25,654.51</td><td>20,307</td></tr><tr><th scope="row" role="rowheader">01</th><td>02</td><td>JJ-F11</td><td>Nut</td><td>5,601</td><td>25,820.61</td><td>16,803</td></tr></table></div></div>`),
+    );
+  const tree = await isolated("globalThis.SailERPReadOnly.snapshot()");
+  assert.equal(tree.rows.length, 2);
+  assert.equal(tree.headers[2], "Material");
+  assert.equal(tree.rows[0][2], "JJ-F04");
+  assert.equal(tree.rows[0][4], "6,769");
+  assert.equal(tree.partial, false);
+  // Empty-layout diagnostics contain structure/header labels, not sales rows.
+  await source
+    .locator("body")
+    .evaluate(
+      (el) =>
+        (el.innerHTML = '<h2>Sales Report</h2><div role="treegrid"></div>'),
+    );
+  const diagnostic = await isolated("globalThis.SailERPReadOnly.snapshot()");
+  assert.equal(diagnostic.diagnostics.treegrids, 1);
+  assert.ok(diagnostic.error);
   await app.locator("#paste-open").click();
   await app
     .locator("#paste")

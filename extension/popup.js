@@ -1,5 +1,7 @@
 const $ = (id) => document.getElementById(id);
-let latest, source;
+let latest,
+  source,
+  diagnostic = null;
 const status = (s) => ($("status").textContent = s);
 function destination(url) {
   try {
@@ -30,6 +32,8 @@ async function sap() {
 }
 $("capture").onclick = async () => {
   latest = null;
+  diagnostic = null;
+  $("diagnostics").disabled = true;
   show();
   try {
     await chrome.storage.local.remove("latest");
@@ -46,11 +50,30 @@ $("capture").onclick = async () => {
       .map((r) => r.result)
       .filter((r) => r && !r.error)
       .sort((a, b) => b.rows.length - a.rows.length);
-    if (!reports.length)
+    if (!reports.length) {
+      const frames = results.map((r) => r.result?.diagnostics).filter(Boolean);
+      diagnostic = {
+        version: 1,
+        sourceHost: "jenga.ucc.uwm.edu",
+        frames: results.map((r) => ({
+          frameId: r.frameId,
+          title: r.result?.title,
+          diagnostics: r.result?.diagnostics,
+        })),
+      };
+      $("diagnostics").disabled = false;
+      const count = (key) => frames.reduce((sum, d) => sum + (d[key] || 0), 0);
       throw Error(
-        "No rendered report rows found. The report may be empty, virtualized, or inside an inaccessible frame. Export CSV/TSV instead.",
+        `Capture could not read this layout. Diagnostics: ${results.length} accessible frames; ${count("tables")} tables; ${count("treegrids")} tree grids; ${count("grids")} grids; ${count("ui5Tables")} UI5 tables. Click Download table diagnostics and share that file. It contains table structure and header names, without sales rows or credentials. CSV/TSV export remains available.`,
       );
+    }
     latest = reports[0];
+    if (!/report/i.test(latest.title)) {
+      const parentTitle = results
+        .map((r) => r.result?.title)
+        .find((t) => t && /report/i.test(t));
+      if (parentTitle) latest.title = parentTitle;
+    }
     await chrome.storage.local.set({ latest });
     show();
     status(
@@ -182,3 +205,17 @@ chrome.storage.onChanged.addListener((changes, area) => {
   latest = changes.latest.newValue;
   show();
 });
+
+$("diagnostics").onclick = () => {
+  if (!diagnostic) return;
+  const url = URL.createObjectURL(
+    new Blob([JSON.stringify(diagnostic, null, 2)], {
+      type: "application/json",
+    }),
+  );
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = "sailerp-table-diagnostics.json";
+  a.click();
+  setTimeout(() => URL.revokeObjectURL(url), 1000);
+};

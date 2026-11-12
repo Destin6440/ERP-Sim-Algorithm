@@ -12,7 +12,7 @@ This optional Manifest V3 extension reads rendered report-table text in your exi
 
 ## Capture and import
 
-1. Click **Capture visible report**. Check the rendered row count and headers. The helper attempts regular HTML and ARIA/UI5-style tables, including accessible same-origin frames. It does not extract hidden, unloaded or off-screen virtual rows. Equal detail rows are retained; duplicated table candidates are not added together.
+1. Click **Capture visible report**. Check the rendered row count and headers. The helper attempts regular HTML and ARIA/UI5-style tables, including tree grids, separate header/body tables and row headers, including accessible same-origin frames. It does not extract hidden, unloaded or off-screen virtual rows. Equal detail rows are retained; duplicated table candidates are not added together.
 2. Select your SailERP tab in **SailERP destination**, then click **Send to SailERP preview**. Alternatively download the capture JSON and load it under SailERP **Inputs → Read SAP reports**.
 3. In SailERP, click **Review captured report**. Choose the report's number format, filter one round/day if necessary, and explicitly enter the observation duration. The heading's “Round 1 Day 1” alone does not prove all report rows cover one day.
 4. Verify completeness against SAP totals, filters, pagination and scrollable tables. Confirm that sales Quantity represents **actual units sold during the period**, not open orders or cumulative totals. Confirm that sales Cost is **total period COGS**, not unit cost. If this report does not establish those meanings, use another report or manual entry.
@@ -45,3 +45,7 @@ The local URL patterns cover development ports; only root/index pages are offere
 ## Development verification
 
 `npm test` covers report interpretation. With the local server running, `node scripts/report-browser-check.mjs` runs synthetic report fixtures using the optional Playwright installation described in the root README. Set `PLAYWRIGHT_MODULE` and `SAILERP_URL` as documented there. The reader runs in an isolated browser world; Chrome message transport is simulated because the managed cloud browser blocks installing new extensions. Tests cover staged delivery, explicit completeness/period confirmation, watcher isolation, stopping, partial reports and missing data. Native installation and real authenticated SAP extraction remain unverified.
+
+### Update after a capture failure
+
+Run `git pull` in your SailERP folder, open `chrome://extensions` or `edge://extensions`, and click the extension card's reload arrow. Refresh the SAP report tab, then capture again. Version 1.0.1 adds UI5 tree-grid, separate TD-header and row-header handling plus open shadow-root inspection. If it still fails, choose **Download table diagnostics** and share that JSON file for layout diagnosis. It contains frame/table counts and header labels, not sales rows, credentials, page HTML or session URLs. Live compatibility is still verified in your browser, not inferred from a screenshot. CSV/TSV export remains the fallback.
