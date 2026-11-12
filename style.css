@@ -344,3 +344,24 @@ textarea {
     font-size: 22px;
   }
 }
+.workspace-area {
+  scroll-margin-top: 20px;
+}
+.area-heading {
+  padding: 24px 0 0;
+}
+.area-heading h2 {
+  font-size: 32px;
+  margin-bottom: 8px;
+}
+.area-heading p {
+  color: #647c67;
+  margin-top: 0;
+}
+#outputs {
+  border-top: 3px solid #b5c896;
+  margin-top: 40px;
+}
+#outputs-title:focus {
+  outline: none;
+}

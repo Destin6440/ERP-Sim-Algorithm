@@ -21,168 +21,203 @@
         </div>
         <button id="demo">Open separate demonstration</button>
       </div>
-      <nav>
-        <a href="#entry">01 Observe</a><a href="#decisions">02 Decide</a
-        ><a href="#experiments">03 Learn</a
-        ><a href="#settings">Product settings</a>
+      <nav aria-label="Workspace areas">
+        <a href="#inputs">01 Inputs</a><a href="#outputs">02 Outputs</a>
       </nav>
       <div id="message" role="status" aria-live="polite"></div>
-      <section id="entry">
-        <div class="section-head">
-          <div>
-            <small>01 / OBSERVE</small>
-            <h2>Latest observation</h2>
-          </div>
-          <div class="tools">
-            <button id="paste-open">Paste report</button
-            ><button id="undo">Undo last update</button>
-          </div>
-        </div>
-        <p class="hint">
-          Sales are units sold <strong>during this period</strong>. Stock is
-          available now. Blank = missing; 0 = zero.
-        </p>
-        <div class="controls">
-          <label
-            >Simulated days covered<input
-              id="days"
-              type="number"
-              min="0.01"
-              step="any"
-              value="1" /></label
-          ><label
-            >Availability for all<select id="bulk">
-              <option value="">Choose…</option>
-              <option value="continuous">Continuously stocked</option>
-              <option value="stockout">Had a stockout</option>
-              <option value="unsure">Unsure</option>
-            </select></label
-          ><label class="check"
-            ><input type="checkbox" id="contaminated" />Settings changed
-            mid-period</label
-          >
-        </div>
-        <div class="table-wrap">
-          <table>
-            <thead>
-              <tr>
-                <th>Product</th>
-                <th>Units sold / period</th>
-                <th>Current stock</th>
-                <th>Availability</th>
-              </tr>
-            </thead>
-            <tbody id="grid"></tbody>
-          </table>
-        </div>
-        <details>
-          <summary>
-            Optional · incoming batches, reported revenue & total COGS, game
-            horizon
-          </summary>
-          <p class="hint">
-            Incoming is finished product only. “Cost” in a report means total
-            COGS here, never unit cost. Revenue and COGS are per product for
-            this period.
-          </p>
-          <label
-            >Days remaining in game<input
-              id="remaining"
-              type="number"
-              min="0"
-              step="any"
-              placeholder="Unknown"
-          /></label>
-          <div id="optional"></div>
-        </details>
-        <div class="savebar">
-          <span
-            >Each save closes a period. Sales and stock fields clear
-            afterward.</span
-          ><button class="primary" id="save">Save observation →</button>
-        </div>
-      </section>
-      <section id="decisions">
-        <small>02 / DECIDE</small>
-        <h2>Priorities for the next boundary</h2>
-        <div id="actions"></div>
-        <div class="table-wrap">
-          <table>
-            <thead>
-              <tr>
-                <th>Product</th>
-                <th>Observed / day</th>
-                <th>Margin after ads / day</th>
-                <th>Planning / day</th>
-                <th>Coverage</th>
-                <th>Draft quantity</th>
-              </tr>
-            </thead>
-            <tbody id="metrics"></tbody>
-          </table>
-        </div>
-        <p class="hint">
-          Draft quantities are provisional unless incoming orders are confirmed.
-          They are not feasible production schedules: capacity, raw materials
-          and order status are not modeled. Future arrivals are not stock today.
-        </p>
-        <details>
-          <summary>Suggested policies & price-test calculator</summary>
-          <div id="policies" class="controls"></div>
+      <div id="inputs" class="workspace-area" aria-labelledby="inputs-title">
+        <div class="area-heading">
+          <small>01 / ENTER DATA</small>
+          <h2 id="inputs-title">Inputs</h2>
           <p>
-            These starting policies are editable suggestions, not proven optimal
-            settings.
+            Enter and update everything here. Save a period to view your
+            outputs.
+          </p>
+        </div>
+        <section id="entry">
+          <div class="section-head">
+            <div>
+              <small>PERIOD OBSERVATION</small>
+              <h2>Latest observation</h2>
+            </div>
+            <div class="tools">
+              <button id="paste-open">Paste report</button
+              ><button id="undo">Undo last update</button>
+            </div>
+          </div>
+          <p class="hint">
+            Sales are units sold <strong>during this period</strong>. Stock is
+            available now. Blank = missing; 0 = zero.
           </p>
           <div class="controls">
-            <label>Product<select id="price-product"></select></label
-            ><label
-              >Test price<input
-                id="test-price"
+            <label
+              >Simulated days covered<input
+                id="days"
                 type="number"
-                step=".01" /></label
-            ><button id="calculate">Calculate required sales</button>
+                min="0.01"
+                step="any"
+                value="1" /></label
+            ><label
+              >Availability for all<select id="bulk">
+                <option value="">Choose…</option>
+                <option value="continuous">Continuously stocked</option>
+                <option value="stockout">Had a stockout</option>
+                <option value="unsure">Unsure</option>
+              </select></label
+            ><label class="check"
+              ><input type="checkbox" id="contaminated" />Settings changed
+              mid-period</label
+            >
           </div>
-          <p id="price-result"></p>
-        </details>
-      </section>
-      <section id="experiments">
-        <small>03 / LEARN</small>
-        <h2>Advertising experiment</h2>
-        <p>
-          One experiment at a time. Save a clean baseline, then explicitly
-          confirm the budget applied at the next boundary.
-        </p>
-        <div id="experiment"></div>
-        <p class="hint">
-          Before/after comparisons do not prove causality: competitors and
-          demand can change. Aggregate product data cannot identify the best
-          advertising region.
-        </p>
-      </section>
-      <section id="settings">
-        <small>WORKSPACE</small>
-        <h2>Products & actual settings</h2>
-        <p>
-          Close observations before changing settings. “Applied in SAP” records
-          a change effective at the next named simulation boundary.
-          Recommendations never apply themselves.
-        </p>
-        <div id="products"></div>
-        <button id="add">Add product</button>
-        <details>
-          <summary>History & backups</summary>
-          <div class="tools">
-            <button id="backup">Download JSON backup</button
-            ><label class="file"
-              >Restore JSON<input
-                id="restore"
-                type="file"
-                accept="application/json"
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Product</th>
+                  <th>Units sold / period</th>
+                  <th>Current stock</th>
+                  <th>Availability</th>
+                </tr>
+              </thead>
+              <tbody id="grid"></tbody>
+            </table>
+          </div>
+          <details>
+            <summary>
+              Optional · incoming batches, reported revenue & total COGS, game
+              horizon
+            </summary>
+            <p class="hint">
+              Incoming is finished product only. “Cost” in a report means total
+              COGS here, never unit cost. Revenue and COGS are per product for
+              this period.
+            </p>
+            <label
+              >Days remaining in game<input
+                id="remaining"
+                type="number"
+                min="0"
+                step="any"
+                placeholder="Unknown"
             /></label>
+            <div id="optional"></div>
+          </details>
+          <div class="savebar">
+            <span
+              >Each save closes a period. Sales and stock fields clear
+              afterward.</span
+            ><button class="primary" id="save">
+              Save observation → view outputs
+            </button>
           </div>
-          <div id="history"></div>
-        </details>
-      </section>
+        </section>
+        <section id="settings">
+          <small>PRODUCT INPUTS</small>
+          <h2>Products & actual settings</h2>
+          <p>
+            Close observations before changing settings. “Applied in SAP”
+            records a change effective at the next named simulation boundary.
+            Recommendations never apply themselves.
+          </p>
+          <div id="products"></div>
+          <button id="add">Add product</button>
+          <details>
+            <summary>Backups</summary>
+            <div class="tools">
+              <button id="backup">Download JSON backup</button
+              ><label class="file"
+                >Restore JSON<input
+                  id="restore"
+                  type="file"
+                  accept="application/json"
+              /></label>
+            </div>
+          </details>
+        </section>
+        <section id="tools">
+          <h2>Policies & experiments</h2>
+          <details>
+            <summary>Policies & price-test inputs</summary>
+            <div id="policies" class="controls"></div>
+            <p>
+              These starting policies are editable suggestions, not proven
+              optimal settings.
+            </p>
+            <div class="controls">
+              <label>Product<select id="price-product"></select></label
+              ><label
+                >Test price<input
+                  id="test-price"
+                  type="number"
+                  step=".01" /></label
+              ><button id="calculate">Calculate required sales</button>
+            </div>
+          </details>
+          <details>
+            <summary>Advertising experiment inputs</summary>
+            <p>
+              One experiment at a time. Save a clean baseline, then confirm the
+              budget applied at the next boundary.
+            </p>
+            <div id="experiment-input"></div>
+          </details>
+        </section>
+      </div>
+      <div id="outputs" class="workspace-area" aria-labelledby="outputs-title">
+        <div class="area-heading">
+          <small>02 / TAKE ACTION</small>
+          <h2 id="outputs-title" tabindex="-1">Outputs</h2>
+          <p>
+            Direct actions and results from saved observations.
+            <a href="#inputs">Update inputs ↑</a>
+          </p>
+        </div>
+        <section id="decisions">
+          <small>PRIORITIZED ACTIONS</small>
+          <h2>Priorities for the next boundary</h2>
+          <div id="actions"></div>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Product</th>
+                  <th>Observed / day</th>
+                  <th>Margin after ads / day</th>
+                  <th>Planning / day</th>
+                  <th>Coverage</th>
+                  <th>Draft quantity</th>
+                </tr>
+              </thead>
+              <tbody id="metrics"></tbody>
+            </table>
+          </div>
+          <p class="hint">
+            Draft quantities are provisional unless incoming orders are
+            confirmed. They are not feasible production schedules: capacity, raw
+            materials and order status are not modeled. Future arrivals are not
+            stock today.
+          </p>
+        </section>
+        <section id="price-output">
+          <h2>Price-test result</h2>
+          <p id="price-result">Enter a test price and calculate in Inputs.</p>
+        </section>
+        <section id="experiments">
+          <h2>Advertising experiment results</h2>
+          <div id="experiment"></div>
+          <p class="hint">
+            Before/after comparisons do not prove causality: competitors and
+            demand can change. Aggregate product data cannot identify the best
+            advertising region.
+          </p>
+        </section>
+        <section>
+          <details>
+            <summary>Saved observation history</summary>
+            <div id="history"></div>
+          </details>
+        </section>
+      </div>
       <footer>
         Decision support only. Enter decisions in SAP yourself. Standard costs
         give an accounting margin proxy; fixed costs, financing and other

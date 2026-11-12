@@ -22,6 +22,10 @@ There is nothing to install for the application or calculation tests. CI runs th
 
 Commit these files to your intended repository. In GitHub **Settings → Pages**, select **Deploy from a branch**, your branch, and **/(root)**. The app uses relative URLs and works under a repository subpath. No repository destination or remote has been created by the app. Publishing is a separate action you control.
 
+## Inputs and Outputs
+
+**Inputs** is the single area for period observations, product settings, incoming batches, report totals, days remaining, policies, price-test inputs, advertising experiment controls, and backup/restore. **Outputs** contains direct actions, calculation tables, price-test results, advertising comparisons, and saved observation history. The top navigation jumps between the two areas. Saving an observation takes you to Outputs; the Inputs link brings you back to enter the next period. Existing saved browser data is preserved.
+
 ## A quick round
 
 1. Add products with unique material codes. Set actual unit selling price, unit cost, cost basis and total advertising per simulated day across regions. Confirm **Applied in SAP** with the next boundary (for example, “Round 1, day 3 start”). This records your confirmation, not a SAP operation.

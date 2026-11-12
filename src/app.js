@@ -243,6 +243,8 @@ $("#save").onclick = () => {
   persist();
   render();
   message("Observation saved. New sales and stock cells are blank.");
+  $("#outputs-title").focus({ preventScroll: true });
+  $("#outputs").scrollIntoView({ behavior: "smooth" });
 };
 $("#remaining").onchange = (e) => {
   const n = number(e.target.value);
@@ -330,9 +332,12 @@ $("#calculate").onclick = () => {
   if (!p) return;
   const a = plan(p, state.observations, state.policy.target, state.remaining),
     test = number($("#test-price").value);
-  if (test !== null && test < p.cost + 0.01)
+  if (test !== null && test < p.cost + 0.01) {
+    $("#price-output").scrollIntoView({ behavior: "smooth" });
     return ($("#price-result").textContent = "Use at least unit cost + 0.01.");
+  }
   const result = priceTest(p.price, p.cost, a.rate, test);
+  $("#price-output").scrollIntoView({ behavior: "smooth" });
   $("#price-result").textContent =
     `Required sales/day: ${fmt(result.required)}. ${result.reason}${a.stale ? " Baseline is stale." : ""}`;
 };
@@ -340,6 +345,8 @@ function renderExperiment() {
   const x = state.experiment;
   if (!x) {
     $("#experiment").innerHTML =
+      "<p>No active experiment. Set up an advertising test in Inputs.</p>";
+    $("#experiment-input").innerHTML =
       `<div class="controls"><label>Product<select id="ad-product">${state.products.map((p) => `<option>${esc(p.code)}</option>`).join("")}</select></label><label>Proposed daily advertising<input id="ad-budget" type="number" min="0" step="any"></label><label>Next application boundary<input id="ad-boundary" placeholder="Day 6 start"></label><button id="ad-start">Record baseline & applied in SAP</button></div>`;
     $("#ad-start").onclick = () => {
       if (state.dirty)
@@ -398,7 +405,9 @@ function renderExperiment() {
       )
     : null;
   $("#experiment").innerHTML =
-    `<p><b>${esc(x.code)}</b> · ${fmt(x.budget)}/day · applied at ${esc(x.boundary)}</p>${result ? `<h3>${result.label}</h3><p>Additional ads/day: ${fmt(result.extra)} · Observed margin change/day: ${fmt(result.delta)} · Extra units/day needed: ${fmt(result.needed)}<br>Company margin change/day: ${fmt(result.companyDelta)} ${result.companyDelta === null ? "(complete matching product sets required)" : ""}</p><p>${result.reason}</p>` : "<p>Awaiting a new observation.</p>"}<button id="ad-end">Close experiment (keep actual budget)</button>`;
+    `<p><b>${esc(x.code)}</b> · ${fmt(x.budget)}/day · applied at ${esc(x.boundary)}</p>${result ? `<h3>${result.label}</h3><p>Additional ads/day: ${fmt(result.extra)} · Observed margin change/day: ${fmt(result.delta)} · Extra units/day needed: ${fmt(result.needed)}<br>Company margin change/day: ${fmt(result.companyDelta)} ${result.companyDelta === null ? "(complete matching product sets required)" : ""}</p><p>${result.reason}</p>` : "<p>Awaiting a new observation.</p>"}`;
+  $("#experiment-input").innerHTML =
+    `<p>Active experiment: <b>${esc(x.code)}</b>, ${fmt(x.budget)}/day, applied at ${esc(x.boundary)}. Results are in Outputs.</p><button id="ad-end">Close experiment (keep actual budget)</button>`;
   $("#ad-end").onclick = () => {
     checkpoint();
     state.experiment = null;

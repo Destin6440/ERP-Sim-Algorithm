@@ -20,6 +20,25 @@ try {
     document.querySelector("#mode").textContent.includes("DEMONSTRATION"),
   );
   assert.equal(await page.locator("#grid tr").count(), 3);
+  assert.equal(
+    await page
+      .locator(
+        "#outputs input, #outputs select, #outputs textarea, #outputs button",
+      )
+      .count(),
+    0,
+  );
+  for (const id of [
+    "grid",
+    "products",
+    "policies",
+    "price-product",
+    "test-price",
+    "experiment-input",
+    "restore",
+  ]) {
+    assert.equal(await page.locator(`#inputs #${id}`).count(), 1);
+  }
   await page.locator("#grid input").first().focus();
   await page.keyboard.press("Enter");
   assert.equal(
@@ -112,6 +131,10 @@ try {
     JSON.parse(localStorage.getItem("sailerp-demo-v1")),
   );
   assert.equal(saved.products[0].price, 4);
+  // Advertising controls stay in Inputs; results stay in Outputs.
+  await page
+    .getByText("Advertising experiment inputs", { exact: true })
+    .click();
   // Advertising test baseline, application boundary and two-day evaluation.
   await page.locator("#ad-product").selectOption("F02");
   await page.locator("#ad-budget").fill("800");
